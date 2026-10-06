@@ -67,14 +67,25 @@ Defined in `src/lib/motion.ts` and as CSS variables:
 
 There is one easing family: expo-out for entrances and a symmetric in-out for state changes.
 
-- **Scroll scenes** (GSAP, desktop only, `gsap.matchMedia`): the hero pin, the "Just in"
+- **Scroll scenes on desktop** (GSAP, `gsap.matchMedia`): the hero pin, the "Just in"
   horizontal track, the Protect story and parallax. All are transform/opacity/clip-path only.
+- **Scroll scenes on phones and tablets:** most visitors are on a phone, so the home page
+  has its own touch-first scenes rather than switched-off desktop ones. Stages stick with
+  CSS `position: sticky`, never JavaScript pinning, so touch scrolling stays native:
+  - the hero's words part, the frame recedes and the seal turns as you scroll away;
+  - "Under the loupe" plays on a sticky stage (`product-showcase-mobile.tsx`);
+  - the departments grid drifts column against column, each photograph settling in;
+  - "Just in" cards are dealt in from the right, with a swipe progress line;
+  - the Becho Protect stages are a deck of cards, each sliding over the last;
+  - the brand marquee speeds up and leans with a flick, and runs backwards when you
+    scroll up (desktop too).
 - **"Under the loupe"** (`components/home/product-showcase.tsx`): the signature scene. The
   stage pins and four cut-out pieces take turns in a pool of light. Each rises in, turns
   with the pointer, and the specialist's notes draw out on leader lines from the exact
   details they describe. The notes come from the same hotspot data as the authentication
-  report. A side index jumps between pieces. On touch screens and with reduced motion
-  it becomes a stack of annotated cards.
+  report. A side index jumps between pieces. On phones the stage sticks while each
+  piece's details light up one at a time, each drawing a line down to its note. With
+  reduced motion it becomes a stack of annotated cards.
 - **First visit:** a short seal-and-wordmark curtain, at most once per session, decided
   before hydration so it never flashes. It is skipped entirely for reduced motion.
 - **Smooth scroll:** Lenis drives GSAP's ticker. It is off for touch devices and for reduced motion.
@@ -111,7 +122,7 @@ src/
     orders.ts fees.ts payments.ts validation.ts format.ts image-loader.ts
   store/               Zustand stores (cart, wishlist, history, account, seller, ui, toast)
 scripts/               offline asset generation (own package.json; not part of the app build)
-  studio/              cutout.mjs → compose.mjs: studio photography from source photos
+  studio/              cutout.mjs → segment.py → compose.mjs: studio photography
   logo/                build.mjs: wordmark and monogram outlines from Bodoni Moda
 public/catalog/        studio photographs (480 / 960 / 1440 px WebP)
 public/cutouts/        transparent cut-outs for scroll scenes (640 / 1200 px WebP)
@@ -121,25 +132,55 @@ public/cutouts/        transparent cut-outs for scroll scenes (640 / 1200 px Web
 
 Marketplace photos arrive in every light and on every surface. To make the catalogue
 read as one shoot, products are cut out of their source photograph and placed on a
-single house backdrop with a shared floor line, scale and contact shadow. Pieces cropped
-by their frame, such as a coat on a model, are anchored to the bottom edge instead.
+single house backdrop with a shared floor line, scale and contact shadow. Where the
+original photograph crops a piece (a coat on a model, a shoe held from above), the
+studio frame crops it at the same edge, so nothing ends in a hard line mid-air.
 
 ```bash
 cd scripts && npm install
-npm run studio:cutout     # local background removal; cached in studio/.cache
+npm run studio:cutout     # quick local cut-outs; cached in studio/.cache
+
+# High-quality mattes and per-photo fixes (Python 3.10+)
+python -m venv .venv && .venv/Scripts/pip install -r studio/requirements.txt
+.venv/Scripts/python studio/segment.py
+
 npm run studio:compose    # writes public/catalog, public/cutouts, src/lib/data/studio.ts
 ```
 
-Background removal runs locally, with no external service and no per-image cost.
-**Review every cut-out** before adding it to `studio/list.json`. 50 of the 65 products
-passed. The rest keep their original photograph because the cut-out left residue, a
-stray hand or a clipped edge. On cards, hovering a studio shot reveals the original
-photograph. In production this step belongs in the listing pipeline, run when a seller
-uploads.
+Everything runs locally, with no external service and no per-image cost. Each entry in
+`studio/list.json` can ask for:
+
+- `"matte": "birefnet"`: BiRefNet for fine edges such as chains, straps and raffia;
+- `"parts"`, `"keep"`, `"drop"`: Segment Anything selections that remove hands, props
+  and stands (one box per object is the most reliable prompt);
+- `"erase"`, `"crop"`, `"fill"`, `"clean"`, `"rotate"`: precise retouching;
+- `"grounded"`, `"suspended"`, `"fade"`, `"bleed"`, `"plate"`: how the piece is framed.
+
+**Review every result** before publishing. All 65 products have a studio photograph.
+Where no photo showed the whole piece, a full shot from the same series became the
+primary image (the Air Force 1, the sunglasses). The silk carré, photographed only
+draped, is mounted as a framed plate. On cards, hovering a studio shot reveals the
+original photograph. In production this step belongs in the listing pipeline, run when
+a seller uploads.
 
 The wordmark and monogram are SVG outlines generated from Bodoni Moda (`npm run logo`),
 with a sturdier optical size for the header and a high-contrast one for display. The
 logo renders identically everywhere and needs no font download.
+
+## Deploying
+
+The app needs a Node server (route handlers and on-demand pages), so deploy it as a
+Next.js app rather than a static export. `scripts/` is not part of the build.
+
+- **Vercel (simplest):** push the repo to GitHub, choose "Add New → Project" on
+  vercel.com, import the repo and deploy. No settings are needed. Every push to
+  `main` redeploys, and pull requests get preview URLs.
+- **Any Node host** (Render, Railway, a VPS): `npm ci && npm run build`, then
+  `npm start` (set `PORT` if the host requires it). Node 20.9 or newer.
+- **Docker:** add `output: "standalone"` to `next.config.ts`, then run the generated
+  `.next/standalone/server.js` with `public/` and `.next/static` copied beside it.
+
+There are no environment variables yet. Payments are a demo seam and take no money.
 
 ### Connecting a real backend
 
@@ -172,5 +213,3 @@ These are the integration seams; UI code doesn't need to change:
   in `src/lib/market.ts` and would come from completed-sales data in production. Edits,
   Journal articles, specialist notes and concierge requests are mock content too, and
   concierge requests are stored locally like the rest of the account.
-#   J u s t B e c h o  
- 

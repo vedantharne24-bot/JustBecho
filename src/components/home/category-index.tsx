@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { ArrowUpRight } from "lucide-react";
+import { gsap, useGSAP } from "@/lib/gsap";
 import { cn } from "@/lib/utils";
 import { Eyebrow } from "@/components/ui/misc";
 
@@ -18,10 +19,41 @@ interface CategoryItem {
 
 /**
  * An editorial index: category names set large, the photograph for whichever
- * line is hovered (or focused) is revealed in a sticky frame alongside.
+ * line is hovered (or focused) is revealed in a sticky frame alongside. On
+ * phones it's a grid whose columns drift past each other as you scroll, each
+ * photograph settling into its frame.
  */
 export function CategoryIndex({ categories }: { categories: CategoryItem[] }) {
   const [active, setActive] = useState(0);
+  const grid = useRef<HTMLUListElement>(null);
+
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia();
+      mm.add("(max-width: 1023px) and (prefers-reduced-motion: no-preference)", () => {
+        const cards = gsap.utils.toArray<HTMLElement>("[data-cat-card]", grid.current);
+        // Every other column runs against the scroll
+        const columns = [...new Set(cards.map((c) => c.offsetLeft))].sort((a, b) => a - b);
+        const drifting = cards.filter((c) => columns.indexOf(c.offsetLeft) % 2 === 1);
+        if (drifting.length) {
+          gsap.fromTo(
+            drifting,
+            { yPercent: 16 },
+            { yPercent: -8, ease: "none", scrollTrigger: { trigger: grid.current, start: "top bottom", end: "bottom top", scrub: true } },
+          );
+        }
+        cards.forEach((card) => {
+          gsap.fromTo(
+            card.querySelector("[data-cat-zoom]"),
+            { scale: 1.22 },
+            { scale: 1, ease: "none", scrollTrigger: { trigger: card, start: "top bottom", end: "top 35%", scrub: true } },
+          );
+        });
+      });
+      return () => mm.revert();
+    },
+    { scope: grid },
+  );
 
   return (
     <section aria-labelledby="categories-title" className="container-x py-24 sm:py-32">
@@ -78,12 +110,14 @@ export function CategoryIndex({ categories }: { categories: CategoryItem[] }) {
           </ul>
 
           {/* Mobile & tablet: image cards */}
-          <ul className="mt-10 grid grid-cols-2 gap-x-3 gap-y-8 sm:grid-cols-3 lg:hidden">
+          <ul ref={grid} className="mt-10 grid grid-cols-2 gap-x-3 gap-y-8 pb-[6%] sm:grid-cols-3 lg:hidden">
             {categories.map((c) => (
-              <li key={c.slug}>
+              <li key={c.slug} data-cat-card>
                 <Link href={`/categories/${c.slug}`} className="group block">
                   <div className="relative aspect-[4/5] overflow-hidden bg-media">
-                    <Image src={c.image.src} alt={c.image.alt} fill sizes="(min-width: 640px) 30vw, 46vw" className="object-cover transition-transform duration-700 group-active:scale-105" />
+                    <div data-cat-zoom className="absolute inset-0 will-change-transform">
+                      <Image src={c.image.src} alt={c.image.alt} fill sizes="(min-width: 640px) 30vw, 46vw" className="object-cover" />
+                    </div>
                   </div>
                   <div className="mt-3 flex items-baseline justify-between">
                     <span className="font-display text-2xl">{c.name}</span>

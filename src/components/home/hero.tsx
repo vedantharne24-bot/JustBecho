@@ -93,12 +93,20 @@ export function Hero({ slides }: { slides: HeroSlide[] }) {
                 0.62,
               );
           } else {
-            // Tablet & mobile: gentle parallax as the hero leaves
-            gsap.to("[data-hero-zoom]", {
-              yPercent: 12,
-              ease: "none",
-              scrollTrigger: { trigger: root.current, start: "top top", end: "bottom top", scrub: true },
-            });
+            // Phones & tablets: as the hero leaves, the words part, the frame
+            // recedes while the photograph inside keeps travelling, and the seal
+            // turns. (Only properties the intro doesn't animate, so they never fight.)
+            gsap
+              .timeline({
+                defaults: { ease: "none" },
+                scrollTrigger: { trigger: root.current, start: "top top", end: "bottom top", scrub: 0.4 },
+              })
+              .to("[data-hero-line='1']", { xPercent: -26, opacity: 0.15 }, 0)
+              .to("[data-hero-line='2']", { xPercent: 26, opacity: 0.15 }, 0)
+              .to("[data-hero-stage]", { scale: 0.9, yPercent: 6 }, 0)
+              .to("[data-hero-media]", { scale: 1.16 }, 0)
+              .to("[data-hero-zoom]", { yPercent: 12 }, 0)
+              .to("[data-hero-seal-spin]", { rotate: 220, scale: 0.82 }, 0);
           }
 
           return () => {
@@ -152,7 +160,7 @@ export function Hero({ slides }: { slides: HeroSlide[] }) {
 
       {/* Photograph — a framed window that opens to full-bleed on scroll */}
       <div className="container-x relative z-10 mt-8 lg:static lg:mt-0 lg:p-0">
-        <div className="hero-stage relative aspect-square overflow-hidden sm:aspect-[16/11] lg:absolute lg:inset-0 lg:aspect-auto">
+        <div data-hero-stage className="hero-stage relative aspect-square overflow-hidden sm:aspect-[16/11] lg:absolute lg:inset-0 lg:aspect-auto">
           <Link
             href={slide.href}
             className="absolute inset-0 block"

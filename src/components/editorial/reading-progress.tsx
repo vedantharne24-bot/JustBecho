@@ -32,7 +32,7 @@ export function ReadingProgress({ targetId }: { targetId: string }) {
 
   return (
     <div aria-hidden className="fixed inset-x-0 top-0 z-[55] h-[2px]">
-      <div ref={bar} className="h-full origin-left scale-x-0 bg-accent" />
+      <div ref={bar} className="h-full origin-left bg-accent" style={{ transform: "scaleX(0)" }} />
     </div>
   );
 }

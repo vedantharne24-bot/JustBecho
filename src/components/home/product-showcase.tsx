@@ -8,6 +8,7 @@ import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
 import { scrollToTarget } from "@/lib/lenis";
 import { useFinePointer } from "@/hooks/use-media-query";
 import { cn } from "@/lib/utils";
+import { ShowcaseMobile } from "./product-showcase-mobile";
 
 export interface ShowcasePiece {
   slug: string;
@@ -158,7 +159,7 @@ export function ProductShowcase({ pieces }: { pieces: ShowcasePiece[] }) {
   };
 
   return (
-    <section ref={root} aria-labelledby="showcase-title" className="theme-dark relative overflow-hidden">
+    <section ref={root} aria-labelledby="showcase-title" className="theme-dark relative overflow-x-clip">
       {/* ── Desktop: pinned stage ─────────────────────────────────────── */}
       <div className="relative hidden h-[100svh] min-h-[700px] lg:block lg:motion-reduce:hidden" onPointerMove={onPointerMove} onPointerLeave={resetTilt}>
         {pieces.map((p, i) => (
@@ -315,7 +316,7 @@ export function ProductShowcase({ pieces }: { pieces: ShowcasePiece[] }) {
 
           <nav aria-label="Showcase pieces" className="flex items-stretch gap-5">
             <div aria-hidden className="relative w-px bg-line">
-              <div ref={progress} className="absolute inset-x-0 top-0 h-full origin-top scale-y-0 bg-fg" />
+              <div ref={progress} className="absolute inset-x-0 top-0 h-full origin-top bg-fg" style={{ transform: "scaleY(0)" }} />
             </div>
             <ol className="flex flex-col gap-2">
               {pieces.map((p, i) => (
@@ -336,8 +337,11 @@ export function ProductShowcase({ pieces }: { pieces: ShowcasePiece[] }) {
         </div>
       </div>
 
-      {/* ── Mobile, tablet and reduced motion: stacked ───────────────── */}
-      <div className="container-x py-24 lg:hidden lg:motion-reduce:block">
+      {/* ── Phones and tablets: the same story on a sticky stage ───────── */}
+      <ShowcaseMobile pieces={pieces} />
+
+      {/* ── Reduced motion, any size: stacked ─────────────────────────── */}
+      <div className="container-x hidden py-24 motion-reduce:block">
         <p className="mono flex items-center gap-3 text-muted">
           <span className="text-fg">01</span>
           <span className="h-px w-8 bg-line-strong" />
