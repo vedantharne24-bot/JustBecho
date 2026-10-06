@@ -1,0 +1,5 @@
+rembg[cpu]>=2.0.85
+opencv-python-headless>=4.10
+pymatting>=1.1
+pillow>=10
+numpy>=1.26

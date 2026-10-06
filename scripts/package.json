@@ -1,0 +1,16 @@
+{
+  "name": "justbecho-asset-scripts",
+  "private": true,
+  "type": "module",
+  "description": "Offline asset generation: studio photography and the logo outlines. Kept apart from the app so its dependencies stay lean.",
+  "scripts": {
+    "studio:cutout": "node studio/cutout.mjs",
+    "studio:compose": "node studio/compose.mjs",
+    "logo": "node logo/build.mjs"
+  },
+  "dependencies": {
+    "@imgly/background-removal-node": "^1.4.5",
+    "fontkit": "^2.0.4",
+    "sharp": "^0.35.5"
+  }
+}

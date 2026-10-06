@@ -1,0 +1,654 @@
+[
+  {
+    "slug": "hermes-kelly-28-sellier-bleu-paon",
+    "id": "1652427019217-3ded1a356f10"
+  },
+  {
+    "slug": "louis-vuitton-speedy-bandouliere-25-monogram",
+    "id": "1691480288782-142b953cf664"
+  },
+  {
+    "slug": "dior-vibe-zip-bowling-bag-medium",
+    "id": "1646243371362-f4261325d031",
+    "erase": [
+      [
+        270,
+        370,
+        1350,
+        447
+      ]
+    ]
+  },
+  {
+    "slug": "gucci-gg-marmont-small-matelasse-black",
+    "id": "1548036328-c9fa89d128fa"
+  },
+  {
+    "slug": "saint-laurent-envelope-medium-red",
+    "id": "1587467512961-120760940315"
+  },
+  {
+    "slug": "prada-re-nylon-bucket-bag-black",
+    "id": "1668435734524-f56709d4403e"
+  },
+  {
+    "slug": "louis-vuitton-x-supreme-keepall-bandouliere-45-red",
+    "id": "1567755997194-f92b5dc9106f",
+    "keep": [
+      [
+        700,
+        600
+      ],
+      [
+        700,
+        260
+      ],
+      [
+        800,
+        560
+      ],
+      [
+        1080,
+        450
+      ]
+    ],
+    "drop": [
+      [
+        700,
+        1000
+      ],
+      [
+        300,
+        830
+      ],
+      [
+        1100,
+        820
+      ]
+    ]
+  },
+  {
+    "slug": "valentino-rockstud-glam-lock-grey",
+    "id": "1559563458-527698bf5295",
+    "parts": [
+      {
+        "box": [
+          350,
+          190,
+          1060,
+          790
+        ],
+        "drop": [
+          [
+            1030,
+            785
+          ]
+        ]
+      }
+    ],
+    "matte": "birefnet",
+    "crop": {
+      "right": 905
+    },
+    "bleed": [
+      "right"
+    ]
+  },
+  {
+    "slug": "rolex-submariner-date-126613lb-bluesy",
+    "id": "1730757679771-b53e798846cf"
+  },
+  {
+    "slug": "rolex-datejust-41-chocolate-diamond",
+    "id": "1600003014755-ba31aa59c4b6",
+    "matte": "birefnet",
+    "fade": [
+      "top",
+      "bottom"
+    ]
+  },
+  {
+    "slug": "rolex-cosmograph-daytona-116505-everose",
+    "id": "1587925358603-c2eea5305bbc"
+  },
+  {
+    "slug": "rolex-cosmograph-daytona-126500ln-white",
+    "id": "1606744188285-d0a49e58f538"
+  },
+  {
+    "slug": "omega-speedmaster-moonwatch-professional",
+    "id": "1584378687113-8739c327634c"
+  },
+  {
+    "slug": "omega-seamaster-diver-300m-blue",
+    "id": "1691865179028-1729b766a5cd",
+    "matte": "birefnet",
+    "fade": [
+      "top",
+      "bottom"
+    ]
+  },
+  {
+    "slug": "cartier-santos-de-cartier-medium",
+    "id": "1773414686135-cffd9fbe3590"
+  },
+  {
+    "slug": "cartier-roadster-chronograph",
+    "id": "1747995525955-92010650c3ae",
+    "erase": [
+      [
+        [
+          150,
+          560
+        ],
+        [
+          620,
+          560
+        ],
+        [
+          560,
+          690
+        ],
+        [
+          440,
+          730
+        ],
+        [
+          340,
+          790
+        ],
+        [
+          300,
+          860
+        ],
+        [
+          150,
+          900
+        ]
+      ]
+    ],
+    "matte": "birefnet",
+    "fade": [
+      "bottom"
+    ]
+  },
+  {
+    "slug": "cartier-tank-must-large",
+    "id": "1581063683670-6df2247f1d8e"
+  },
+  {
+    "slug": "patek-philippe-nautilus-5711-1a-blue",
+    "id": "1626624386327-5204714bae9f"
+  },
+  {
+    "slug": "audemars-piguet-royal-oak-15400or",
+    "id": "1638872726305-35e2e39fb154"
+  },
+  {
+    "slug": "breitling-navitimer-b01-chronograph-43",
+    "id": "1548171916-c0dea7f94ca6"
+  },
+  {
+    "slug": "cartier-baignoire-allongee-vintage",
+    "id": "1759406069569-efb854b3410b"
+  },
+  {
+    "slug": "off-white-air-jordan-1-chicago-the-ten",
+    "id": "1695748966450-3abe5c25b481"
+  },
+  {
+    "slug": "air-jordan-1-low-se-navy-suede",
+    "id": "1679284392391-b4abfe0cc625"
+  },
+  {
+    "slug": "air-jordan-1-retro-high-og-taxi",
+    "id": "1661324257527-ce9379163e1b"
+  },
+  {
+    "slug": "air-jordan-1-low-og-bred-toe",
+    "id": "1552346154-21d32810aba3"
+  },
+  {
+    "slug": "nike-dunk-low-panda",
+    "id": "1623684225794-a8f1f5037f5c"
+  },
+  {
+    "slug": "nike-sb-dunk-low-orange-mint",
+    "id": "1692620334820-355161f652a8"
+  },
+  {
+    "slug": "adidas-yeezy-boost-350-v2-onyx",
+    "id": "1723739618017-4482a5b21fa8"
+  },
+  {
+    "slug": "adidas-yeezy-boost-350-v2-bone",
+    "id": "1718802319434-4142f3539a35",
+    "parts": [
+      {
+        "box": [
+          0,
+          990,
+          1400,
+          1700
+        ],
+        "keep": [
+          [
+            40,
+            1450
+          ],
+          [
+            1360,
+            1530
+          ]
+        ],
+        "drop": [
+          [
+            700,
+            1800
+          ]
+        ]
+      }
+    ],
+    "matte": "birefnet",
+    "fill": true,
+    "bleed": [
+      "left",
+      "right"
+    ]
+  },
+  {
+    "slug": "adidas-yeezy-boost-750-light-grey",
+    "id": "1548100721-15f0e76035c8",
+    "keep": [
+      [
+        600,
+        400
+      ],
+      [
+        700,
+        640
+      ],
+      [
+        900,
+        560
+      ]
+    ],
+    "drop": [
+      [
+        700,
+        770
+      ],
+      [
+        400,
+        750
+      ],
+      [
+        950,
+        760
+      ]
+    ]
+  },
+  {
+    "slug": "supreme-script-varsity-jacket-black",
+    "id": "1503431194692-82dd03d18093"
+  },
+  {
+    "slug": "balenciaga-political-campaign-hoodie-navy",
+    "id": "1554411529-ee36dfde51b9"
+  },
+  {
+    "slug": "balenciaga-soccer-t-shirt-oversized",
+    "id": "1711925843272-2b832bdee139"
+  },
+  {
+    "slug": "fear-of-god-essentials-hoodie-cloud-dancer",
+    "id": "1620799140188-3b2a02fd9a77",
+    "keep": [
+      [
+        720,
+        600
+      ],
+      [
+        720,
+        300
+      ],
+      [
+        540,
+        700
+      ],
+      [
+        900,
+        700
+      ]
+    ],
+    "drop": [
+      [
+        400,
+        80
+      ],
+      [
+        1000,
+        100
+      ],
+      [
+        1100,
+        400
+      ],
+      [
+        200,
+        650
+      ],
+      [
+        1300,
+        880
+      ]
+    ],
+    "suspended": true
+  },
+  {
+    "slug": "supreme-backpack-ss19-navy",
+    "id": "1544827058-2c6f2eb9d9c0"
+  },
+  {
+    "slug": "burberry-kensington-heritage-trench-honey",
+    "id": "1633821879282-0c4e91f96232"
+  },
+  {
+    "slug": "max-mara-101801-icon-coat-camel",
+    "id": "1744707850576-7e31b3ce5021"
+  },
+  {
+    "slug": "max-mara-madame-coat-ivory",
+    "id": "1680690395101-1b2a56c0ac21"
+  },
+  {
+    "slug": "brunello-cucinelli-cashmere-overcoat-camel",
+    "id": "1619603364937-8d7af41ef206"
+  },
+  {
+    "slug": "gucci-horsebit-1953-loafer-suede",
+    "id": "1676121270762-47c8d3a7b9d5"
+  },
+  {
+    "slug": "santoni-horsebit-loafer-cognac",
+    "id": "1616406432452-07bc5938759d"
+  },
+  {
+    "slug": "christian-louboutin-dandelion-spikes-loafer",
+    "id": "1784822041007-a2083ecb1b37"
+  },
+  {
+    "slug": "saint-laurent-chelsea-boot-black",
+    "id": "1534233812932-59b8fa1b780c"
+  },
+  {
+    "slug": "bottega-veneta-slouch-knee-boots",
+    "id": "1763661300203-aa3e2702f510"
+  },
+  {
+    "slug": "tiffany-lock-bangle-yellow-gold-diamonds",
+    "id": "1655707063513-a08dad26440e"
+  },
+  {
+    "slug": "clash-de-cartier-bracelet-rose-gold",
+    "id": "1689367436442-76c859315008"
+  },
+  {
+    "slug": "cartier-santos-aviator-sunglasses",
+    "id": "1732139637227-ff5c7522fd9d"
+  },
+  {
+    "slug": "chanel-n5-eau-de-parfum-100ml",
+    "id": "1541643600914-78b084683601"
+  },
+  {
+    "slug": "bleu-de-chanel-eau-de-parfum-100ml",
+    "id": "1523293182086-7651a899d37f"
+  },
+  {
+    "slug": "gucci-logo-belt-bag-web",
+    "id": "1645276266921-73416ef97dd7"
+  },
+  {
+    "slug": "hermes-kelly-25-sellier-rouge-casaque",
+    "id": "1621735588289-30f4d7c6f31a",
+    "matte": "birefnet",
+    "erase": [
+      [
+        0,
+        1524,
+        1400,
+        1867
+      ]
+    ]
+  },
+  {
+    "slug": "chanel-classic-double-flap-medium-black",
+    "id": "1512201078372-9c6b2a0d528a",
+    "matte": "birefnet"
+  },
+  {
+    "slug": "louis-vuitton-pochette-metis-monogram",
+    "id": "1583623733237-4d5764a9dc82",
+    "matte": "birefnet",
+    "suspended": true
+  },
+  {
+    "slug": "lady-dior-medium-natural-cannage-raffia",
+    "id": "1603009135528-7ad60fc1ffe4",
+    "matte": "birefnet"
+  },
+  {
+    "slug": "gucci-blondie-shoulder-bag-pink",
+    "id": "1682364853446-db043f643207",
+    "matte": "birefnet",
+    "erase": [
+      [
+        800,
+        560,
+        1400,
+        933
+      ],
+      [
+        498,
+        128,
+        540,
+        352
+      ],
+      [
+        [
+          700,
+          190
+        ],
+        [
+          905,
+          190
+        ],
+        [
+          905,
+          312
+        ],
+        [
+          860,
+          318
+        ],
+        [
+          790,
+          306
+        ],
+        [
+          745,
+          300
+        ],
+        [
+          700,
+          294
+        ]
+      ],
+      [
+        [
+          880,
+          250
+        ],
+        [
+          980,
+          250
+        ],
+        [
+          980,
+          430
+        ],
+        [
+          908,
+          430
+        ],
+        [
+          902,
+          340
+        ],
+        [
+          885,
+          318
+        ]
+      ],
+      [
+        762,
+        355,
+        786,
+        436
+      ],
+      [
+        [
+          860,
+          296
+        ],
+        [
+          930,
+          296
+        ],
+        [
+          930,
+          412
+        ],
+        [
+          893,
+          412
+        ],
+        [
+          886,
+          372
+        ],
+        [
+          878,
+          346
+        ],
+        [
+          860,
+          336
+        ]
+      ]
+    ]
+  },
+  {
+    "slug": "gucci-ophidia-mini-hobo",
+    "id": "1710144012477-298aecd45d4a",
+    "matte": "birefnet"
+  },
+  {
+    "slug": "prada-cahier-shoulder-bag-silver",
+    "id": "1590739225287-bd31519780c3",
+    "matte": "birefnet",
+    "rotate": 20
+  },
+  {
+    "slug": "rolex-submariner-date-126610ln",
+    "id": "1662384197911-e82189f4dc60",
+    "matte": "birefnet"
+  },
+  {
+    "slug": "air-jordan-1-retro-high-og-lost-and-found",
+    "id": "1669205073423-5da5a5280572",
+    "matte": "birefnet"
+  },
+  {
+    "slug": "off-white-nike-air-force-1-university-gold",
+    "id": "1628253747716-0c4f5c90fdda",
+    "matte": "birefnet",
+    "keep": [
+      [
+        450,
+        1150
+      ],
+      [
+        900,
+        1150
+      ],
+      [
+        1050,
+        1050
+      ]
+    ],
+    "drop": [
+      [
+        650,
+        1500
+      ],
+      [
+        650,
+        1700
+      ],
+      [
+        300,
+        1450
+      ]
+    ]
+  },
+  {
+    "slug": "balenciaga-triple-s-white",
+    "id": "1666970661676-434e949725de",
+    "matte": "birefnet",
+    "grounded": true
+  },
+  {
+    "slug": "vlone-friends-hoodie-black",
+    "id": "1660486044177-45cd45bb5e99",
+    "matte": "birefnet"
+  },
+  {
+    "slug": "rimowa-x-supreme-topas-multiwheel-82",
+    "id": "1660001834938-8539dcab2adb",
+    "matte": "birefnet",
+    "parts": [
+      {
+        "box": [
+          265,
+          320,
+          770,
+          933
+        ]
+      },
+      {
+        "box": [
+          735,
+          330,
+          1235,
+          905
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "hermes-carre-90-chaine-dancre-violet",
+    "id": "1551028442-ee84b4d3a50a",
+    "plate": {
+      "x": 100,
+      "y": 500,
+      "size": 1200
+    }
+  },
+  {
+    "slug": "prada-linea-rossa-sunglasses-black",
+    "id": "1708799366365-a24608103bed",
+    "matte": "birefnet"
+  }
+]

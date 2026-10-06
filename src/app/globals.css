@@ -1,26 +1,705 @@
 @import "tailwindcss";
+@import "lenis/dist/lenis.css";
+
+/* ──────────────────────────────────────────────────────────────────────────
+   JustBecho design tokens
+   A restrained editorial palette: warm blacks, ivories and one signature
+   accent — "Seal", the colour of sealing wax, used for authentication marks,
+   counts and moments that need the eye. Everything else is ink and paper.
+   ────────────────────────────────────────────────────────────────────────── */
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Palette */
+  --c-ink: #0c0b0a;
+  --c-onyx: #161513;
+  --c-graphite: #2a2825;
+  --c-ash: #45413b;
+  --c-stone: #6b665d;
+  --c-mist: #a8a298;
+  --c-bone: #e8e3d9;
+  --c-linen: #efebe3;
+  --c-ivory: #f5f2eb;
+  --c-paper: #fbfaf6;
+  --c-champagne: #b8a07a;
+  --c-seal: #a8362a;
+  --c-seal-bright: #d65a41;
+  --c-moss: #2f6b4f;
+  --c-amber: #9a6b1f;
+
+  /* Semantic — light surface (default) */
+  --bg: var(--c-ivory);
+  --surface: var(--c-paper);
+  --surface-2: var(--c-linen);
+  --media: var(--c-bone);
+  --fg: var(--c-ink);
+  --muted: var(--c-stone);
+  --subtle: #8f897e;
+  --line: rgb(12 11 10 / 0.11);
+  --line-strong: rgb(12 11 10 / 0.26);
+  --accent: var(--c-seal);
+  --accent-fg: var(--c-paper);
+  --invert: var(--c-ink);
+  --invert-fg: var(--c-ivory);
+  --hover: rgb(12 11 10 / 0.04);
+  --success: var(--c-moss);
+  --error: var(--c-seal);
+  --warning: var(--c-amber);
+  --scrim: rgb(12 11 10 / 0.48);
+
+  /* Layout */
+  --gutter: clamp(1rem, 3.2vw, 3rem);
+  --header-h: 60px;
+  --radius: 2px;
+
+  /* Motion language */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-soft: cubic-bezier(0.25, 1, 0.5, 1);
+  --dur-fast: 200ms;
+  --dur-base: 420ms;
+  --dur-slow: 900ms;
+
+  color-scheme: light;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@media (min-width: 1024px) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --header-h: 72px;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Sticky toolbars sit under the header while it's shown, at the top when it hides */
+:root {
+  --sticky-top: var(--header-h);
+}
+html[data-header='hidden'] {
+  --sticky-top: 0px;
+}
+
+.theme-dark {
+  --bg: var(--c-ink);
+  --surface: var(--c-onyx);
+  --surface-2: var(--c-graphite);
+  --media: var(--c-graphite);
+  --fg: var(--c-ivory);
+  --muted: var(--c-mist);
+  --subtle: #7d786f;
+  --line: rgb(245 242 235 / 0.13);
+  --line-strong: rgb(245 242 235 / 0.3);
+  --accent: var(--c-seal-bright);
+  --accent-fg: var(--c-ink);
+  --invert: var(--c-ivory);
+  --invert-fg: var(--c-ink);
+  --hover: rgb(245 242 235 / 0.06);
+  --scrim: rgb(0 0 0 / 0.6);
+  color-scheme: dark;
+  color: var(--fg);
+  background-color: var(--bg);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-media: var(--media);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-subtle: var(--subtle);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-accent: var(--accent);
+  --color-accent-fg: var(--accent-fg);
+  --color-invert: var(--invert);
+  --color-invert-fg: var(--invert-fg);
+  --color-hover: var(--hover);
+  --color-success: var(--success);
+  --color-error: var(--error);
+  --color-warning: var(--warning);
+  --color-scrim: var(--scrim);
+
+  --color-ink: var(--c-ink);
+  --color-onyx: var(--c-onyx);
+  --color-graphite: var(--c-graphite);
+  --color-stone: var(--c-stone);
+  --color-mist: var(--c-mist);
+  --color-bone: var(--c-bone);
+  --color-ivory: var(--c-ivory);
+  --color-paper: var(--c-paper);
+  --color-champagne: var(--c-champagne);
+  --color-seal: var(--c-seal);
+
+  --font-display: var(--font-bodoni), "Bodoni 72", Didot, Georgia, serif;
+  --font-sans: var(--font-hanken), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-dm-mono), ui-monospace, "SFMono-Regular", monospace;
+
+  --ease-out: var(--ease-out);
+  --ease-in-out: var(--ease-in-out);
+  --ease-soft: var(--ease-soft);
+
+  --radius-xs: var(--radius);
+}
+
+/* ── Base ─────────────────────────────────────────────────────────────── */
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scrollbar-gutter: stable;
+  }
+
+  /* The gutter is already reserved, so dialogs' scroll lock must not add its own
+     compensation — otherwise the page shifts sideways whenever a sheet opens. */
+  html body[data-scroll-locked] {
+    margin-right: 0 !important;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    font-feature-settings: "ss01", "cv11";
+    min-height: 100svh;
+    overflow-x: clip;
+  }
+
+  ::selection {
+    background: var(--c-seal);
+    color: var(--c-paper);
+  }
+
+  :focus-visible {
+    outline: 1.5px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  button,
+  [role="button"] {
+    cursor: pointer;
+  }
+
+  button:disabled {
+    cursor: not-allowed;
+  }
+
+  img {
+    user-select: none;
+  }
+
+  input,
+  textarea,
+  select {
+    font: inherit;
+  }
+
+  /* Numeric data reads best with tabular figures */
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgb(12 11 10 / 0.18);
+    border: 3px solid transparent;
+    background-clip: content-box;
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
+
+/* ── Typography ───────────────────────────────────────────────────────── */
+
+@utility font-display {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  font-weight: 400;
+}
+
+@utility display-xl {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-size: clamp(3.75rem, 13.2vw, 14.5rem);
+  line-height: 0.84;
+  letter-spacing: -0.035em;
+}
+
+@utility display-lg {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-size: clamp(2.9rem, 7.4vw, 8rem);
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+}
+
+@utility display-md {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-size: clamp(2.25rem, 4.6vw, 4.75rem);
+  line-height: 0.98;
+  letter-spacing: -0.025em;
+}
+
+@utility display-sm {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-size: clamp(1.75rem, 2.8vw, 2.75rem);
+  line-height: 1.04;
+  letter-spacing: -0.018em;
+}
+
+@utility title {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-size: 1.5rem;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+@utility lede {
+  font-size: clamp(1rem, 1.15vw, 1.1875rem);
+  line-height: 1.55;
+  letter-spacing: -0.003em;
+}
+
+@utility label {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  line-height: 1.3;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+@utility mono {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  line-height: 1.4;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* Prices and money: light grotesk, lining tabular figures — calmer than
+   Didone numerals at large sizes and perfectly aligned in columns */
+@utility price {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums lining-nums;
+  font-feature-settings: "tnum", "lnum";
+}
+
+@utility container-x {
+  width: 100%;
+  max-width: 1680px;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+@utility hairline {
+  border-color: var(--line);
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Underline that draws in from the left on hover and retreats to the right */
+@utility link-draw {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-size: 0% 1px;
+  background-position: 100% 100%;
+  transition: background-size 520ms var(--ease-out);
+  &:hover,
+  &:focus-visible,
+  &[aria-current="page"] {
+    background-size: 100% 1px;
+    background-position: 0% 100%;
+  }
+}
+
+/* Persistent underline that retracts on hover */
+@utility link-undraw {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-size: 100% 1px;
+  background-position: 0% 100%;
+  transition: background-size 520ms var(--ease-out);
+  &:hover {
+    background-size: 0% 1px;
+    background-position: 100% 100%;
+  }
+}
+
+/* Static film grain — used once, on cinematic dark surfaces */
+@utility grain {
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.07;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}
+
+/* ── Scroll reveals ───────────────────────────────────────────────────────
+   Elements are only hidden when JS is confirmed (html.js) and motion is
+   allowed, so content is never lost if scripts fail.
+   ────────────────────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: no-preference) {
+  html.js [data-reveal] {
+    opacity: 0;
+    transform: translate3d(0, 28px, 0);
+    transition:
+      opacity 900ms var(--ease-out),
+      transform 1100ms var(--ease-out);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+  html.js [data-reveal="fade"] {
+    transform: none;
+  }
+  /* A sliding CSS mask rather than clip-path: IntersectionObserver treats a
+     target's own clip-path as hiding it, so a fully clipped element would never
+     be seen — and never revealed. The mask is twice the element's height, clear
+     above and solid below; sliding it up wipes the element in from the bottom. */
+  html.js [data-reveal="mask"] {
+    opacity: 1;
+    transform: none;
+    -webkit-mask-image: linear-gradient(to top, #000 50%, transparent 50%);
+    mask-image: linear-gradient(to top, #000 50%, transparent 50%);
+    -webkit-mask-size: 100% 200%;
+    mask-size: 100% 200%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: 0 0%;
+    mask-position: 0 0%;
+    transition:
+      mask-position 1300ms var(--ease-out),
+      -webkit-mask-position 1300ms var(--ease-out);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+  html.js [data-reveal="mask"] > .reveal-media {
+    transform: scale(1.14);
+    transition: transform 1700ms var(--ease-out);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+  html.js [data-reveal="line"] {
+    opacity: 1;
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+    transition: transform 1200ms var(--ease-out);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  html.js [data-reveal].is-in {
+    opacity: 1;
+    transform: none;
+  }
+  html.js [data-reveal="mask"].is-in {
+    -webkit-mask-position: 0 100%;
+    mask-position: 0 100%;
+  }
+  html.js [data-reveal="mask"].is-in > .reveal-media {
+    transform: scale(1);
+  }
+}
+
+/* Headings revealed by SplitReveal stay hidden until split (with a failsafe) */
+@media (prefers-reduced-motion: no-preference) {
+  html.js .split-reveal {
+    visibility: hidden;
+    animation: failsafe-visible 0s linear 2.5s forwards;
+  }
+}
+@keyframes failsafe-visible {
+  to {
+    visibility: visible;
+  }
+}
+
+/* Split-text lines: each line is masked and its inner span rises into view */
+.split-line {
+  display: block;
+  overflow: clip;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+
+/* ── Interaction primitives ──────────────────────────────────────────── */
+
+/* Text roll used inside buttons: the label rolls up, a duplicate rolls in */
+.roll {
+  display: inline-flex;
+  overflow: hidden;
+  position: relative;
+  line-height: 1.2;
+}
+.roll > span {
+  display: block;
+  transition: transform 520ms var(--ease-out);
+}
+.roll > span + span {
+  position: absolute;
+  inset: 0;
+  transform: translateY(105%);
+}
+.group\/btn:hover .roll > span:first-child,
+.group\/btn:focus-visible .roll > span:first-child {
+  transform: translateY(-105%);
+}
+.group\/btn:hover .roll > span + span,
+.group\/btn:focus-visible .roll > span + span {
+  transform: translateY(0);
+}
+
+/* Skeleton shimmer */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+.skeleton {
+  background: linear-gradient(90deg, var(--media) 0%, color-mix(in oklab, var(--media), white 35%) 50%, var(--media) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s linear infinite;
+}
+
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.spin-slow {
+  animation: spin-slow 28s linear infinite;
+}
+
+@keyframes marquee {
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes stage-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+/* ── Hero ────────────────────────────────────────────────────────────── */
+
+@media (min-width: 1024px) {
+  /* The framed window: insets shrink to zero as --p goes 0 → 1 on scroll */
+  .hero-stage {
+    --fh: 62svh;
+    --fw: calc(var(--fh) * 0.75);
+    clip-path: inset(
+      calc((100% - var(--fh)) / 2 * (1 - var(--p, 0)))
+      calc((100% - var(--fw)) / 2 * (1 - var(--p, 0)))
+    );
+  }
+  /* Monochrome inside the frame (the headline inverts cleanly over it);
+     colour floods in as the frame opens */
+  .hero-stage [data-hero-zoom] {
+    filter: grayscale(calc(1 - var(--p, 0))) contrast(calc(1.06 - var(--p, 0) * 0.06));
+  }
+}
+
+/* Hold intro elements until their GSAP start states are applied */
+@media (prefers-reduced-motion: no-preference) {
+  html.js .hero[data-intro="pending"] [data-hero-intro] {
+    opacity: 0;
+    animation: failsafe-opacity 0s linear 3s forwards;
+  }
+}
+@keyframes failsafe-opacity {
+  to {
+    opacity: 1;
+  }
+}
+
+.hero-slide {
+  z-index: 0;
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 1300ms var(--ease-in-out);
+}
+.hero-slide img {
+  transform: scale(1.14);
+  transition: transform 2600ms var(--ease-out);
+}
+.hero-slide.is-prev {
+  z-index: 1;
+  clip-path: inset(0 0 0 0);
+}
+.hero-slide.is-active {
+  z-index: 2;
+  clip-path: inset(0 0 0 0);
+}
+.hero-slide.is-active img,
+.hero-slide.is-prev img {
+  transform: scale(1);
+}
+
+@keyframes hero-progress {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+.hero-progress {
+  animation: hero-progress var(--hero-interval, 5s) linear forwards;
+}
+
+/* ── First-visit intro ───────────────────────────────────────────────── */
+
+.intro-curtain {
+  display: none;
+}
+html[data-intro="playing"] .intro-curtain {
+  --bg: var(--c-ink);
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  background: var(--c-ink);
+  clip-path: inset(0 0 0 0);
+  animation: intro-lift 750ms var(--ease-in-out) 1050ms forwards;
+}
+html[data-intro="playing"] .intro-seal {
+  animation: intro-stamp 680ms cubic-bezier(0.2, 1.4, 0.4, 1) 80ms both;
+}
+html[data-intro="playing"] .intro-word {
+  animation: intro-word 800ms var(--ease-out) 380ms both;
+}
+@keyframes intro-stamp {
+  from {
+    opacity: 0;
+    transform: scale(1.7) rotate(-22deg);
+  }
+}
+@keyframes intro-word {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+    letter-spacing: 0.05em;
+  }
+}
+@keyframes intro-lift {
+  to {
+    clip-path: inset(0 0 100% 0);
+    visibility: hidden;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html[data-intro="playing"] .intro-curtain {
+    display: none;
+  }
+}
+
+/* ── Page transitions (React <ViewTransition />) ─────────────────────── */
+
+::view-transition {
+  pointer-events: none;
+}
+
+::view-transition-group(site-header) {
+  animation: none;
+  z-index: 100;
+}
+::view-transition-old(site-header) {
+  display: none;
+}
+::view-transition-new(site-header) {
+  animation: none;
+}
+
+::view-transition-old(.page) {
+  animation: 180ms var(--ease-in-out) both vt-fade-out;
+}
+::view-transition-new(.page) {
+  animation:
+    360ms var(--ease-out) 90ms both vt-fade-in,
+    620ms var(--ease-out) 60ms both vt-rise;
+}
+
+::view-transition-group(.media-morph) {
+  animation-duration: 520ms;
+  animation-timing-function: var(--ease-out);
+}
+::view-transition-image-pair(.media-morph) {
+  isolation: isolate;
+}
+
+@keyframes vt-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes vt-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes vt-rise {
+  from {
+    transform: translateY(18px);
+  }
+}
+
+/* ── Reduced motion ──────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+  }
 }
